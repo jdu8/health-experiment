@@ -1,0 +1,227 @@
+# Viral Upper Respiratory Infection (Common Cold/Flu)
+# A typical viral URI with realistic symptom progression
+
+disease_id: "viral_uri"
+name: "Viral Upper Respiratory Infection"
+common_name: "Cold/Flu"
+description: "Common viral infection of upper respiratory tract with typical cold/flu symptoms"
+
+natural_history:
+  typical_duration: [7, 14]
+
+  phases:
+    - name: "incubation"
+      day_range: [0, 2]
+      description: "Virus replicating, minimal symptoms"
+
+      symptoms:
+        fatigue:
+          severity_range: [0, 2]
+          trajectory: "flat"
+          progression_rate: 0
+          description_templates:
+            - "feeling a bit off"
+            - "maybe slightly more tired than usual"
+            - "not quite myself"
+          patient_notices: false
+
+    - name: "prodrome"
+      day_range: [3, 5]
+      description: "Early symptoms emerge"
+
+      symptoms:
+        sore_throat:
+          severity_range: [2, 6]
+          trajectory: "increasing"
+          progression_rate: 1.5
+          description_templates:
+            - "scratchy throat"
+            - "throat feels raw"
+            - "painful to swallow"
+            - "my throat is killing me"
+          patient_notices: true
+
+        fatigue:
+          severity_range: [2, 5]
+          trajectory: "increasing"
+          progression_rate: 1.0
+          description_templates:
+            - "feeling tired"
+            - "exhausted"
+            - "no energy"
+            - "just want to sleep"
+          patient_notices: true
+
+        headache:
+          severity_range: [1, 4]
+          trajectory: "stable"
+          progression_rate: 0
+          description_templates:
+            - "dull headache"
+            - "head pressure"
+            - "mild headache"
+          patient_notices: true
+
+    - name: "acute"
+      day_range: [5, 8]
+      description: "Peak illness"
+
+      symptoms:
+        fever:
+          severity_range: [4, 7]
+          trajectory: "peak_then_decline"
+          peak_day: 6
+          description_templates:
+            - "feeling hot"
+            - "chills and fever"
+            - "burning up"
+            - "alternating hot and cold"
+          patient_notices: true
+          objective_measure:
+            type: "temperature_celsius"
+            formula: "37.0 + (severity * 0.3)"
+
+        cough:
+          severity_range: [2, 7]
+          trajectory: "increasing"
+          progression_rate: 1.2
+          subtype: "dry_then_productive"
+          description_templates:
+            - "dry cough"
+            - "can't stop coughing"
+            - "coughing fits"
+            - "coughing up mucus"
+          patient_notices: true
+
+        congestion:
+          severity_range: [4, 8]
+          trajectory: "increasing"
+          progression_rate: 1.0
+          description_templates:
+            - "stuffy nose"
+            - "can't breathe through nose"
+            - "congested"
+            - "nose is completely blocked"
+          patient_notices: true
+
+        body_aches:
+          severity_range: [3, 6]
+          trajectory: "stable"
+          progression_rate: 0
+          description_templates:
+            - "body aches"
+            - "muscles hurt"
+            - "everything hurts"
+            - "achy all over"
+          patient_notices: true
+
+        sore_throat:
+          severity_range: [3, 5]
+          trajectory: "stable"
+          progression_rate: 0
+          description_templates:
+            - "throat still sore"
+            - "throat hurts"
+          patient_notices: true
+
+    - name: "resolution"
+      day_range: [8, 14]
+      description: "Recovery phase"
+
+      symptoms:
+        cough:
+          severity_range: [5, 1]
+          trajectory: "decreasing"
+          progression_rate: -0.7
+          description_templates:
+            - "lingering cough"
+            - "occasional cough"
+            - "cough is getting better"
+          patient_notices: true
+
+        congestion:
+          severity_range: [4, 1]
+          trajectory: "decreasing"
+          progression_rate: -0.6
+          description_templates:
+            - "still a bit stuffy"
+            - "congestion clearing up"
+          patient_notices: true
+
+        fatigue:
+          severity_range: [3, 1]
+          trajectory: "decreasing"
+          progression_rate: -0.5
+          description_templates:
+            - "still a bit tired"
+            - "getting energy back"
+            - "almost back to normal"
+          patient_notices: true
+
+# Complications and risk modifiers
+complications:
+  base_probability: 0.05  # 5% base chance
+
+  risk_modifiers:
+    - factor: "immune_compromised"
+      probability_multiplier: 4.0
+    - factor: "chronic_lung_disease"
+      probability_multiplier: 3.0
+    - factor: "age_over_65"
+      probability_multiplier: 2.0
+    - factor: "poor_sleep"
+      probability_multiplier: 1.3
+    - factor: "high_stress"
+      probability_multiplier: 1.2
+
+  types:
+    - complication_id: "secondary_bacterial"
+      name: "Secondary Bacterial Infection"
+      probability_if_complication: 0.6
+      trigger_day_range: [7, 10]
+
+      new_symptoms:
+        fever_return:
+          severity: 7
+          description: "Fever returns after improving"
+        purulent_sputum:
+          severity: 5
+          description: "Coughing up yellow/green mucus"
+
+      changes_to_existing:
+        cough:
+          severity_modifier: 2
+          duration_extension: 7
+
+    - complication_id: "bronchitis"
+      name: "Acute Bronchitis"
+      probability_if_complication: 0.3
+      trigger_day_range: [10, 21]
+
+      new_symptoms:
+        wheezing:
+          severity: 4
+          description: "Wheezing when breathing"
+
+      changes_to_existing:
+        cough:
+          severity_modifier: 1
+          duration_extension: 14
+
+# Patient-specific modifiers
+patient_modifiers:
+  poor_sleep:
+    effect_on_symptoms: "+1 to all severity scores"
+    effect_on_duration: "+2 days to each phase"
+
+  high_stress:
+    effect_on_symptoms: "+0.5 to all severity scores"
+    effect_on_duration: "+1 day to each phase"
+
+  high_caffeine:
+    effect_on_symptoms: "+1 to headache severity"
+
+  poor_immune:
+    effect_on_symptoms: "+2 to all severity scores"
+    effect_on_duration: "+3 days to each phase"
+    complication_risk_multiplier: 2.0

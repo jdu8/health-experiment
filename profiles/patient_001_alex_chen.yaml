@@ -1,0 +1,69 @@
+# Patient Profile: Alex Chen
+# High anxiety, casual communicator with stress-related health issues
+
+patient_id: "patient_001"
+name: "Alex Chen"
+
+demographics:
+  age: 34
+  gender: "male"
+  occupation: "high school teacher"
+  location: "urban"
+
+communication:
+  formality: 7  # Fairly casual
+  verbosity: 6  # Moderately detailed
+  vocabulary_style: "casual"
+  example_phrases:
+    - "I've been feeling pretty crappy"
+    - "It's annoying af"
+    - "I don't know if this matters but..."
+    - "Should I be worried about this?"
+
+psychological:
+  baseline_anxiety: 7  # High anxiety
+  health_anxiety: 8  # Very anxious about health
+  pain_catastrophizing: 6  # Moderate catastrophizing
+  information_volunteering: "low"  # Tends not to volunteer info
+  current_mood: "stressed"
+  mood_triggers:
+    - "Work evaluation coming up next month"
+    - "Family issues with elderly parent"
+    - "Financial stress from student loans"
+
+biological:
+  height_cm: 175
+  weight_kg: 82
+  bmi: 26.8
+  blood_pressure: "130/85"
+  immune_status: "normal"
+
+  chronic_conditions: []
+
+  risk_factors:
+    - type: "family_history_cvd"
+      details: "Father had MI at age 55"
+      risk_multiplier: 1.3
+    - type: "family_history_migraine"
+      details: "Mother and sister have migraines"
+      risk_multiplier: 1.5
+
+  lifestyle:
+    sleep_hours: 5.5  # Poor sleep
+    sleep_quality: "poor"
+    stress_level: 8  # High stress
+    exercise_frequency: 1  # Rarely exercises
+    exercise_type: "light walking"
+    diet_quality: "moderate"
+    caffeine_intake: "high"
+    caffeine_amount: "4-5 cups/day"
+    alcohol: "moderate"
+    smoking: false
+
+  medications:
+    current: []
+    allergies:
+      - "penicillin"
+
+assigned_disease: "viral_uri"
+disease_start_day: 1

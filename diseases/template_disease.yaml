@@ -1,0 +1,77 @@
+# Template Disease Model
+# Copy this file and customize for each disease
+
+disease_id: "disease_name"
+name: "Full Disease Name"
+common_name: "Common Name"
+description: "Brief description of the disease"
+
+natural_history:
+  typical_duration: [7, 14]  # [min_days, max_days]
+
+  phases:
+    - name: "phase_1"
+      day_range: [1, 3]  # [start_day, end_day]
+      description: "Description of this phase"
+
+      symptoms:
+        symptom_name:
+          severity_range: [0, 3]  # [min, max] on 0-10 scale
+          trajectory: "increasing"  # flat/increasing/decreasing/peak_then_decline/stable
+          progression_rate: 1.0  # Change per day (if applicable)
+          description_templates:
+            - "Description variant 1"
+            - "Description variant 2"
+          patient_notices: true
+
+    - name: "phase_2"
+      day_range: [4, 7]
+      description: "Description of this phase"
+
+      symptoms:
+        symptom_name:
+          severity_range: [3, 7]
+          trajectory: "peak_then_decline"
+          peak_day: 5  # Day when symptom peaks
+          description_templates:
+            - "Description at peak"
+          patient_notices: true
+          objective_measure:
+            type: "temperature_celsius"
+            formula: "37.0 + (severity * 0.3)"
+
+# Optional: Complications
+complications:
+  base_probability: 0.05  # 5% base chance
+
+  risk_modifiers:
+    - factor: "immune_compromised"
+      probability_multiplier: 4.0
+    - factor: "chronic_lung_disease"
+      probability_multiplier: 3.0
+
+  types:
+    - complication_id: "complication_name"
+      name: "Complication Name"
+      probability_if_complication: 0.6
+      trigger_day_range: [7, 10]
+
+      new_symptoms:
+        new_symptom:
+          severity: 5
+          description: "Description of new symptom"
+
+      changes_to_existing:
+        existing_symptom:
+          severity_modifier: +2
+          duration_extension: 7  # Extra days
+
+# Patient-specific modifiers
+patient_modifiers:
+  poor_sleep:
+    effect_on_symptoms: "+1 to all severity scores"
+    effect_on_duration: "+2 days to each phase"
+
+  high_stress:
+    effect_on_symptoms: "+0.5 to all severity scores"
+    effect_on_duration: "+1 day to each phase"

@@ -1,0 +1,57 @@
+experiment:
+  name: "medical_chatbot_memory_study"
+  description: "Comparing chatbot performance with and without conversation history"
+  version: "1.0"
+
+simulation:
+  default_max_days: 14
+  default_max_turns_per_conversation: 10
+  default_conversation_mix:
+    - day: 1
+      type: "medical"
+    - day: 3
+      type: "casual"
+    - day: 5
+      type: "medical_followup"
+    - day: 7
+      type: "casual"
+    - day: 9
+      type: "medical_followup"
+    - day: 12
+      type: "medical_followup"
+
+models:
+  patient_llm:
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    device: "cuda"
+    temperature: 0.7
+    max_tokens: 512
+    quantization: "4bit"
+
+  doctor_llm:
+    model_name: "mistralai/Mistral-7B-Instruct-v0.2"
+    device: "cuda"
+    temperature: 0.7
+    max_tokens: 512
+    quantization: "4bit"
+
+conditions:
+  - "with_history"
+  - "without_history"
+
+evaluation:
+  automatic_metrics: true
+  human_evaluation: false
+  llm_as_judge: false
+
+paths:
+  profiles: "profiles/"
+  diseases: "diseases/"
+  conversations: "data/conversations/"
+  state: "data/state/"
+  results: "data/results/"
+
+logging:
+  level: "INFO"
+  file: "experiment.log"
+  console: true

@@ -1,0 +1,67 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environment
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb_checkpoints/
+
+# Runtime Data (gitignored to avoid large datasets)
+data/conversations/
+data/state/
+data/results/
+
+# Logs
+*.log
+experiment.log
+
+# Model Checkpoints
+models/
+checkpoints/
+*.bin
+*.safetensors
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+
+# Environment Variables
+.env
+.env.local
+
+# OS
+Thumbs.db

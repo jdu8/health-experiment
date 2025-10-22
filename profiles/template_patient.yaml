@@ -1,0 +1,73 @@
+# Template Patient Profile
+# Copy this file and customize for each patient
+
+patient_id: "patient_XXX"
+name: "First Last"
+
+demographics:
+  age: 30
+  gender: "male"  # male/female/other
+  occupation: "occupation name"
+  location: "urban"  # urban/suburban/rural
+
+communication:
+  formality: 5  # 1-10: 1=very formal, 10=very casual
+  verbosity: 5  # 1-10: 1=terse, 10=detailed
+  vocabulary_style: "casual"  # casual/professional/medical
+  example_phrases:
+    - "Example phrase 1"
+    - "Example phrase 2"
+    - "Example phrase 3"
+
+psychological:
+  baseline_anxiety: 5  # 1-10
+  health_anxiety: 5  # 1-10
+  pain_catastrophizing: 5  # 1-10
+  information_volunteering: "medium"  # low/medium/high
+  current_mood: "neutral"
+  mood_triggers:
+    - "Trigger 1"
+    - "Trigger 2"
+
+biological:
+  height_cm: 170
+  weight_kg: 70
+  bmi: 24.2
+  blood_pressure: "120/80"
+  immune_status: "normal"  # normal/compromised/hyperactive
+
+  chronic_conditions: []
+  # Example:
+  # - type: "type_2_diabetes"
+  #   diagnosis_date: "2020-03-15"
+  #   controlled: true
+
+  risk_factors: []
+  # Example:
+  # - type: "family_history_cvd"
+  #   details: "Father had MI at age 55"
+  #   risk_multiplier: 1.3
+
+  lifestyle:
+    sleep_hours: 7.0
+    sleep_quality: "good"  # poor/fair/good/excellent
+    stress_level: 5  # 1-10
+    exercise_frequency: 3  # times per week
+    exercise_type: "moderate walking"
+    diet_quality: "moderate"  # poor/moderate/good
+    caffeine_intake: "moderate"  # none/low/moderate/high
+    caffeine_amount: "2 cups/day"
+    alcohol: "light"  # none/light/moderate/heavy
+    smoking: false
+
+  medications:
+    current: []
+    # Example:
+    # - name: "metformin"
+    #   dose: "500mg"
+    #   frequency: "twice daily"
+    #   indication: "type 2 diabetes"
+    allergies: []
+
+assigned_disease: "viral_uri"
+disease_start_day: 1
