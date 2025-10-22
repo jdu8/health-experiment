@@ -49,7 +49,7 @@ data/results/
 experiment.log
 
 # Model Checkpoints
-models/
+# models/
 checkpoints/
 *.bin
 *.safetensors
